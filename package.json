@@ -1,0 +1,21 @@
+{
+  "name": "markdown",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.1.1",
+    "cookie-parser": "~1.4.6",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.18.2",
+    "express-session": "^1.17.3",
+    "express-validator": "^7.0.1",
+    "http-errors": "~1.6.3",
+    "markdown-it": "^13.0.1",
+    "morgan": "~1.9.1",
+    "sqlite3": "^5.1.6"
+  }
+}
