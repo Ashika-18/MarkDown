@@ -43,6 +43,15 @@ var session_opt = {
   cookie: { maxAge: 60 * 60 * 1000 }
 };
 
+//今回追加する
+app.use(session(session_opt));
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, (public))));
+
 //API用のルーター
 app.use('/api', apiRouter);
 
