@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="content-type" content="text/html"; charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <style>
+        .table-wrapper {
+            width: 100%;
+            height: 200px;
+            overflow: auto;
+            padding: 5px;
+            border: 2px solid #a3a3a3;
+        }
+    </style>
+    <script>
+        var accountId = '';
+        var mkdata = [];
+        var title = '';
+        var source = '';
+        var content = '';
+        var editId = 0;
+        var mode = '新規作成';
+
+        //表示の更新
+        function refresh() {
+            document.querySelector("#accountId").textContent = accountId;
+            document.querySelector('#title').value = title;
+            document.querySelector("#source").value = source;
+            document.querySelector("#content").innerHTML = content;
+            document.querySelector("#modebtn").value = mode;
+        } 
+
+        //データ更新
+        function refreshData() {
+            let cont = ""
+            mkdata.map((ob) => {
+                con += "<tr><td>";
+                con += '<a className="text-dark" href="#" onClick = "getById(event)" name="' + ob.id +'">'; 
+                con += ob.title + "</a>";
+                con += "</td></tr>";
+            });
+            document.querySelector('#datacontainer').innerHTML = con;
+        }
+        
+        //アカウントのチェック
+        function geetAccount() {
+            fetch('/api/check')
+                .then(resp => resp.json())
+                .then(res => {
+                    if (res.result != false) {
+                        accountId = res.result;
+                        getAllData();
+                        refresh();
+                    } else {
+                        window.locatin.href="/login.html"; //ログインページ
+                    }
+                });
+        }
+
+        //全データを取得
+        function getAllData() {
+            fetch('/api/all')
+                .then(resp => resp.json())
+            .then(res => {
+                mkdata = res;
+                refreshData();
+            });
+        }
+
+        //指定IDのデータを取得
+        function getById(e) {
+            fetch('/api/mark' + e.target.name)
+                .then(resp => resp.json())
+                .then(res => {
+                    title = res.title;
+                    source = res.content;
+                    editId = res.id;
+                    getRender(res.content);
+                    mode = "更新";
+                });
+        }
+
+        //Markdownにレンダリングする
+        
+    </script>
+</head>
+<body class="container">
+    <header>
+        <h1 class="display-4"><%= Login %></h1>
+    </header>
+    <div role="main">
+       
+    </div>
+</body>
+</html>
