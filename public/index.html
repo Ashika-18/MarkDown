@@ -85,15 +85,77 @@
         }
 
         //Markdownにレンダリングする
-        
+        function getRender(src) {
+            const source = { source: src};
+            fetch('/api/mark/render', {
+                method: post,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(source),
+            }).then(data => data.json())
+                .then( res => {
+                    content: res.render;
+                    refresh();
+                }); 
+        }
+
+        //データを送信する
+        function sendData() {
+            title = document.querySelector('#title').value;
+            source = document.querySelector('#source').value;
+            if (mode == '新規作成') {
+                create();
+            } else {
+                update();
+            }
+        }
+
+        //レコードを新規作成する
+        function create() {
+            const data = {
+                title: title,
+                content: source,
+                accountId: accountId 
+            }
+            fetch('/api/add', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            }).then(data => {
+                getAllData();
+            });
+        }
+
+        //レコードを更新する
+        function update() {
+            const data = {
+                title: title,
+                content: source,
+                id: editId
+            }
+            fetch('/api/mark/edit', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            }).then(data => {
+                getAllData();
+            });
+        }
     </script>
 </head>
-<body class="container">
-    <header>
-        <h1 class="display-4"><%= Login %></h1>
-    </header>
-    <div role="main">
-       
+<body class="container" onload="geetAccount()">
+    <div class="App">
+        <header>
+            <h1 class="display-4"><%= Login %></h1>
+        </header>
+        <div role="main">
+        
+        </div>
     </div>
 </body>
 </html>
