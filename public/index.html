@@ -154,7 +154,34 @@
             <h1 class="display-4"><%= Login %></h1>
         </header>
         <div role="main">
-        
+            <p class="h5 my-4">Hi,<span id="accountId"></span></p>
+
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead><tr><th>Title</th></tr></thead>
+                    <tbody id="datacontainer"></tbody>
+                </table>
+            </div>
+
+            <div>
+                <div class="form-group">
+                    <label>TITLE</label>
+                    <input type="text" name="title" id="title" class="form-control" value="" />
+                </div>
+                <div class="form-group">
+                    <label>SOURCE</label>
+                    <textarea name="source" id="source" rows="8" class="form-control" value=""></textarea>
+                </div>
+                <center>
+                    <input type="button" id="modebtn" value="作成" onClick="sendData()" class="btn btn-primary m-2">
+                </center>
+            </div>
+            <div class="card mt-4">
+                <div class="card-header text-center h5">Preview</div>
+                <div class="card-body">
+                    <div id="content"></div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
