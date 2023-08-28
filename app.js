@@ -4,9 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 //session
 const session = require('express-session');
 
@@ -15,6 +12,9 @@ const bodyParser = require('body-parser');
 
 //API用のルーター
 var apiRouter = require('./routes/api');
+
+// var indexRouter = require('./routes/index');
+// var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -28,8 +28,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
 
 //Body_Parser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -45,12 +45,6 @@ var session_opt = {
 
 //今回追加する
 app.use(session(session_opt));
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, (public))));
 
 //API用のルーター
 app.use('/api', apiRouter);

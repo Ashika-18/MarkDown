@@ -8,7 +8,7 @@ const ps = require('@prisma/client');
 const prisma = new ps.PrismaClient();
 
 //ログインチェックの関数
-const check = (req, res) => {
+function check(req, res) {
     if (req.session.login == undefined) {
         req.session.back = '/';
         return true;
@@ -95,7 +95,7 @@ router.post('/mark/edit', (req, res, next) => {
             title: req.body.title,
             content: req.body.content
         }
-    }).then(modl => {
+    }).then(model => {
         res.json(model);
     });
 });

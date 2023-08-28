@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- indexページ -->
 <html lang="ja">
 <head>
     <meta http-equiv="content-type" content="text/html"; charset="UTF-8">
@@ -36,7 +37,7 @@
 
         //データ更新
         function refreshData() {
-            let cont = ""
+            let con = ""
             mkdata.map((ob) => {
                 con += "<tr><td>";
                 con += '<a className="text-dark" href="#" onClick = "getById(event)" name="' + ob.id +'">'; 
@@ -47,7 +48,7 @@
         }
         
         //アカウントのチェック
-        function geetAccount() {
+        function getAccount() {
             fetch('/api/check')
                 .then(resp => resp.json())
                 .then(res => {
@@ -56,7 +57,7 @@
                         getAllData();
                         refresh();
                     } else {
-                        window.locatin.href="/login.html"; //ログインページ
+                        window.location.href="/login.html"; //ログインページ
                     }
                 });
         }
@@ -148,13 +149,13 @@
         }
     </script>
 </head>
-<body class="container" onload="geetAccount()">
+<body class="container" onload="getAccount()">
     <div class="App">
         <header>
-            <h1 class="display-4"><%= Login %></h1>
+            <h1 class="display-4 text-primary">Markdown data</h1>
         </header>
         <div role="main">
-            <p class="h5 my-4">Hi,<span id="accountId"></span></p>
+            <p class="h5 my-4">Hi,<span id="accountId"></span>!</p>
 
             <div class="table-wrapper">
                 <table class="table">
@@ -173,7 +174,7 @@
                     <textarea name="source" id="source" rows="8" class="form-control" value=""></textarea>
                 </div>
                 <center>
-                    <input type="button" id="modebtn" value="作成" onClick="sendData()" class="btn btn-primary m-2">
+                    <input type="button" id="modebtn" value="作成" onClick="sendData()" class="btn btn-primary m-2"/>
                 </center>
             </div>
             <div class="card mt-4">
@@ -184,5 +185,8 @@
             </div>
         </div>
     </div>
+    <script>
+    console.log('アカウントIDは' + accountId + 'やねん😖');
+    </script>
 </body>
 </html>
