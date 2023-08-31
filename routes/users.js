@@ -31,7 +31,7 @@ router.post('/login', (req, res, next) => {
         title: 'Users/Login',
         content: '名前かパスワードに問題があります!再度入力を。'
       }
-      res.render('users/login', data);
+      res.render('./users/login.html', data);
     }
   })
 });
